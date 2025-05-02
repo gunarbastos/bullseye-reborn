@@ -1,3 +1,11 @@
+Changes in Bullseye NG version 1.2.3
+====================================
+
+This release of Bullseye NG increases compatibility up to Foundry VTT v12.331.
+
+No functional changes have been done.
+
+
 Changes in Bullseye NG version 1.2.2
 ====================================
 
