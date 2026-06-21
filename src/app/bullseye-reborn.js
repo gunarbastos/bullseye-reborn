@@ -23,72 +23,42 @@
  * SOFTWARE.
  */
 
-#bullseyeng .window-content {
-  background: initial;
-  color: #f0f0e0;
-  padding: 0;
-}
+import { i18n } from '../utils.js'
 
-#bullseyeng .player-header {
-  line-height: 20px;
-  white-space: nowrap;
-  word-break: break-all;
-  border-bottom: 1px solid #f0f0e0;
-  padding: 2px 2px 2px 8px;
-}
+export class BullseyeReborn extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2) {
 
-#bullseyeng .player-icon {
-  border-radius: 50%;
-  flex: 0 0 8px;
-  height: 8px;
-  margin: 5px 8px 0 0;
-}
+  static get PARTS() {
+    return {
+      content: { template: `modules/bullseye-reborn/templates/bullseye-reborn.hbs` },
+    };
+  }
 
-#bullseyeng .target-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
+  static get DEFAULT_OPTIONS() {
+    return {
+      id: `bullseye-reborn`,
+      position: {width: 200, height: 300, top: 70, left: 115 },
+      classes: ['bullseye-reborn'],
+      window: { icon: 'fa-solid fa-skull', title: i18n('bullseyeng.title'), resizable: true, contentClasses: ['standard-form'] },
+      actions: {
+        targetToken: BullseyeReborn.#targetToken,
+      },
+    };
+  }
 
-#bullseyeng .target {
-  border-top: 1px solid #000;
-  border-bottom: 1px solid #333;
-  padding: 2px 2px;
-}
+  static async #targetToken(event) {
+    event.preventDefault();
+    const finalTarget = event.target.closest("[data-token-id]");
+    canvas.tokens.get(finalTarget.dataset.tokenId)?.control({releaseOthers: true});
+  }
 
-#bullseyeng .target:first-child {
-  border-top: 1px solid transparent;
-}
+  async _prepareContext(options) {
+    const base = await super._prepareContext(options);
+    const players = game.users.players.filter(p => p.active);
 
-#bullseyeng .target:last-child {
-  border-bottom: 1px solid transparent;
-}
-
-#bullseyeng .target:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-#bullseyeng .target.active {
-  border-color: #ff6400;
-}
-
-#bullseyeng .target img {
-  flex: 0 0 36px;
-  height: 36px;
-  height: 36px;
-  object-fit: cover;
-  object-position: 50% 0;
-  margin: 3px 8px 0 2px;
-  border: none;
-}
-
-#bullseyeng .target h4 {
-  margin: 0;
-  white-space: nowrap;
-  overflow: hidden;
-  line-height: 42px;
-}
-
-#bullseyeng .no-players {
-  padding: 8px;
+    return {
+      ...base,
+      players: players,
+      empty: players.length === 0,
+    };
+  }
 }

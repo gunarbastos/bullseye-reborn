@@ -23,43 +23,37 @@
  * SOFTWARE.
  */
 
-import { BullseyeNGApplication } from './app/bullseye-ng.js'
-import { i18n } from './utils.js'
-
-let bullseyeNGApp;
-
-const renderApp = () => {
-  if(bullseyeNGApp) {
-    bullseyeNGApp.render()
-  }
-}
+import { BullseyeReborn } from './app/bullseye-reborn.js'
 
 Hooks.once('ready', () => {
-  bullseyeNGApp = new BullseyeNGApplication();
+    game.modules.get('bullseye-reborn').app = new BullseyeReborn();
 })
 
 Hooks.on('targetToken', (user, token, targeted) => {
-  renderApp()
+    game.modules.get('bullseye-reborn')?.app?.render()
 })
 
 Hooks.on('controlToken', (token, controlled) => {
-  renderApp()
+    game.modules.get('bullseye-reborn')?.app?.render()
 })
 
 Hooks.on('renderPlayerList', (app, html, data) => {
-  renderApp()
+    game.modules.get('bullseye-reborn')?.app?.render()
 })
 
 Hooks.on('getSceneControlButtons', controls => {
-  let tokenButton = controls.find(b => b.name == "token")
+  const tokenButton = controls.tokens;
   if (tokenButton) {
-    tokenButton.tools.push({
-      name: "show-bullseye-ng",
-      title: i18n('bullseyeng.open'),
-      icon: "fas fa-list-ul",
-      button: true,
-      visible: game.user.isGM,
-      onClick: () => bullseyeNGApp?.render(true)
-    });
+	if (!tokenButton.tools.showBullseyeReborn) {
+	  tokenButton.tools.showBullseyeReborn = {
+		button: true,
+		icon: 'fas fa-list-ul',
+		title: 'bullseyeng.open',
+		name: 'showBullseyeReborn',
+		visible: game.user.isGM,
+		onChange: () =>
+            game.modules.get('bullseye-reborn')?.app?.render(true)
+	  };
+	}
   }
 });

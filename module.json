@@ -1,9 +1,12 @@
 {
-  "name": "bullseye-ng",
-  "title": "Bullseye NG",
+  "id": "bullseye-reborn",
+  "title": "Bullseye Reborn",
   "description": "A module to assist with finding targets",
-  "author": "Sven \"DrMcCoy\" Hesse",
+  "author": "Tio Gunny",
   "authors": [
+    {
+	  "name": "Tio Gunny"
+	},
     {
       "name": "Sven \"DrMcCoy\" Hesse",
       "email": "drmccoy@drmccoy.de",
@@ -14,21 +17,18 @@
       "email": "victorling@ionshard.com"
     }
   ],
-  "version": "1.2.3",
-  "minimumCoreVersion": "9",
-  "compatibleCoreVersion": "10.291",
+  "version": "14.0.0",
   "compatibility": {
     "minimum": 9,
-    "verified": "12.331"
+    "verified": "14"
   },
-  "manifestPlusVersion": "1.2.0",
-  "url": "https://github.com/DrMcCoy/bullseye-ng",
-  "manifest": "https://github.com/DrMcCoy/bullseye-ng/releases/latest/download/module.json",
-  "download": "https://github.com/DrMcCoy/bullseye-ng/releases/latest/download/module.zip",
-  "license": "https://raw.githubusercontent.com/DrMcCoy/bullseye-ng/v1.2.2/LICENSE",
-  "readme": "https://raw.githubusercontent.com/DrMcCoy/bullseye-ng/v1.2.2/README.md",
-  "bugs": "https://github.com/DrMcCoy/bullseye-ng/issues",
-  "changelog": "https://raw.githubusercontent.com/DrMcCoy/bullseye-ng/v1.2.2/ChangeLog",
+  "url": "https://github.com/gunarbastos/bullseye-reborn",
+  "manifest": "https://github.com/gunarbastos/bullseye-reborn/releases/latest/download/module.json",
+  "download": "https://github.com/gunarbastos/bullseye-reborn/releases/latest/download/module.zip",
+  "license": "https://raw.githubusercontent.com/gunarbastos/bullseye-reborn/main/LICENSE",
+  "readme": "https://raw.githubusercontent.com/gunarbastos/bullseye-reborn/main/README.md",
+  "bugs": "https://github.com/gunarbastos/bullseye-reborn/issues",
+  "changelog": "https://raw.githubusercontent.com/gunarbastos/bullseye-reborn/main/ChangeLog",
   "languages": [
     {
       "lang": "en",
@@ -45,6 +45,6 @@
     "src/index.js"
   ],
   "styles": [
-    "styles/bullseye-ng.css"
+    "styles/bullseye-reborn.css"
   ]
 }

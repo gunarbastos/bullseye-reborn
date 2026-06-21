@@ -23,42 +23,65 @@
  * SOFTWARE.
  */
 
-import { i18n } from '../utils.js'
-
-export class BullseyeNGApplication extends Application {
-  constructor(options = {}) {
-    super(options)
+.bullseye-reborn {
+  .window-content {
+    background: initial;
+    color: #f0f0e0;
+    padding: 0;
   }
 
-  static get defaultOptions() {
-    const options = super.defaultOptions
-    options.title = i18n('bullseyeng.title')
-    options.id = "bullseyeng"
-    options.template = 'modules/bullseye-ng/templates/bullseye-ng.hbs'
-    options.popOut = true
-    options.resizable = true
-    options.left = 115
-    options.top = 70
-    options.width = 200
-    options.height = 300
-    return options
+  .player-header {
+    line-height: 20px;
+    white-space: nowrap;
+    word-break: break-all;
+    border-bottom: 1px solid #f0f0e0;
+    padding: 2px 2px 2px 8px;
   }
 
-  async getData() {
-    const players = game.users.players.filter(p => p.active)
-    let data = {
-      players: players,
-      empty: players.length === 0
-    }
-    return data
+  .player-icon {
+    border-radius: 50%;
+    flex: 0 0 8px;
+    height: 8px;
+    margin: 5px 8px 0 0;
   }
 
-  activateListeners(html) {
-    const targets = $(html).find('.target')
-    targets.on('click', event => {
-      const targetTokenId = event.currentTarget.dataset.tokenId
-      const token = canvas.tokens.get(targetTokenId)
-      token.control({releaseOthers: true})
-    })
+  .target-list {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+  }
+
+  .target {
+    border: 1px solid #333;
+    padding: 2px 2px;
+  }
+
+  .target:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .target.active {
+    border-color: #ff6400;
+  }
+
+  .target img {
+    flex: 0 0 36px;
+    height: 36px;
+    object-fit: cover;
+    object-position: 50% 0;
+    border: none;
+  }
+
+  .target h4 {
+    white-space: nowrap;
+    overflow: hidden;
+    line-height: 42px;
+    margin: 0 0.2rem 0 0;
+  }
+
+  .no-players {
+    padding: 8px;
   }
 }
